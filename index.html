@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pathfinding · Perú</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>
+            <path d="M5.6 5.6l2.1 2.1m8.6 8.6 2.1 2.1M5.6 18.4l2.1-2.1m8.6-8.6 2.1-2.1"/>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-name">Pathfinding</span>
+          <span class="brand-sub">Perú · Algoritmos</span>
+        </div>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle" title="Contraer panel">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+    </div>
+
+    <!-- SELECTOR DE CAPA -->
+    <div class="section-label">Capa de nodos</div>
+    <div class="layer-tabs">
+      <button class="layer-tab active" data-layer="departamentos" id="layerDepts">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+        Departamentos
+      </button>
+      <button class="layer-tab" data-layer="provincias" id="layerProvs">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>
+        Provincias
+      </button>
+      <button class="layer-tab" data-layer="todos" id="layerAll">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="2"/></svg>
+        Todos
+      </button>
+    </div>
+
+    <!-- SELECCIÓN NODOS -->
+    <div class="section-label">Nodos</div>
+    <div class="node-pills">
+      <button class="node-pill origin" id="btnOrigin">
+        <span class="pill-dot origin-dot"></span>
+        <span class="pill-label" id="pillOriginLabel">Seleccionar origen</span>
+      </button>
+      <button class="node-pill dest" id="btnDest">
+        <span class="pill-dot dest-dot"></span>
+        <span class="pill-label" id="pillDestLabel">Seleccionar destino</span>
+      </button>
+    </div>
+
+    <!-- ALGORITMO -->
+    <div class="section-label">Algoritmo</div>
+    <div class="algo-grid">
+      <button class="algo-chip active" data-algo="dijkstra">Dijkstra</button>
+      <button class="algo-chip" data-algo="bfs">BFS</button>
+      <button class="algo-chip" data-algo="greedy">Greedy</button>
+      <button class="algo-chip" data-algo="astar">A*</button>
+      <button class="algo-chip" data-algo="genetic">Genético</button>
+      <button class="algo-chip" data-algo="minimax">Minimax</button>
+      <button class="algo-chip" data-algo="bruteforce">Fuerza Bruta</button>
+      <button class="algo-chip" data-algo="dynamic">Prog. Dinámica</button>
+    </div>
+
+    <!-- ACCIONES -->
+    <div class="section-label">Acciones</div>
+    <div class="actions-col">
+      <button class="action-btn run" id="btnRun">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M5 3l14 9-14 9V3z"/></svg>
+        Ejecutar
+      </button>
+      <button class="action-btn step" id="btnStep">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 4l10 8-10 8V4zm10 0v16"/></svg>
+        Paso a paso
+      </button>
+      <button class="action-btn compare" id="btnCompare">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"/></svg>
+        Comparar todos
+      </button>
+      <button class="action-btn reset" id="btnReset">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
+        Resetear
+      </button>
+    </div>
+
+    <!-- STATUS -->
+    <div class="status-block" id="statusBlock">
+      <div class="status-text" id="stepInfo">Selecciona <b>Origen</b> y haz clic en el mapa.</div>
+      <div class="dist-badge hidden" id="distInfo"></div>
+    </div>
+
+    <!-- LEYENDA -->
+    <div class="section-label">Leyenda</div>
+    <div class="legend-grid">
+      <div class="legend-row"><span class="ldot" style="background:#3b82f6;width:12px;height:12px"></span>Capital</div>
+      <div class="legend-row"><span class="ldot" style="background:#93c5fd;width:8px;height:8px"></span>Provincia</div>
+      <div class="legend-row"><span class="ldot" style="background:#22c55e"></span>Origen</div>
+      <div class="legend-row"><span class="ldot" style="background:#ef4444"></span>Destino</div>
+      <div class="legend-row"><span class="ldot" style="background:#10b981"></span>Visitado</div>
+      <div class="legend-row"><span class="ldot" style="background:#f59e0b"></span>En cola</div>
+      <div class="legend-row"><span class="lline" style="background:#ef4444"></span>Ruta</div>
+    </div>
+
+  </aside>
+
+  <!-- MAP -->
+  <main class="map-container">
+    <div id="map"></div>
+
+    <!-- FLOATING TOP BAR (collapsed sidebar mode) -->
+    <div class="map-topbar hidden" id="mapTopbar">
+      <button class="topbar-expand" id="topbarExpand">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg>
+        Panel
+      </button>
+      <span class="topbar-status" id="topbarStatus"></span>
+    </div>
+
+    <!-- COMPARISON OVERLAY -->
+    <div class="compare-overlay hidden" id="compareOverlay">
+      <div class="compare-panel">
+        <div class="compare-header">
+          <div>
+            <div class="compare-title">Comparación de Algoritmos</div>
+            <div class="compare-subtitle" id="compareSubtitle">— → —</div>
+          </div>
+          <button class="compare-close" id="compareClose">✕</button>
+        </div>
+        <div class="compare-body" id="compareBody"></div>
+      </div>
+    </div>
+  </main>
+
+  <script src="src/config/constants.js"></script>
+  <script src="src/state/appState.js"></script>
+  <script src="src/utils/helpers.js"></script>
+  <script src="src/modules/map.js"></script>
+  <script src="src/modules/markers.js"></script>
+  <script src="src/algorithms/algorithms.js"></script>
+  <script src="src/modules/events.js"></script>
+  <script src="src/main.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7J39q46uhdN9AdLlYJwIUofC-i6sRTOI&callback=initMap"></script>
+</body>
+</html>
