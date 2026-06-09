@@ -4,16 +4,16 @@ Visualizador de algoritmos de búsqueda de rutas sobre el grafo de departamentos
 
 ## Algoritmos incluidos
 
-| Algoritmo | Categoría | Complejidad | Óptimo |
+| Algoritmo | Categoría | 
 |-----------|-----------|-------------|--------|
-| Dijkstra | Exacto | O((V+E) log V) | ✓ |
-| BFS | Búsqueda | O(V + E) | ✗ |
-| Greedy | Heurístico | O(E log V) | ✗ |
-| A* | Heurístico | O(E log V) | ✓ |
-| Genético | Evolutivo | O(G·P·E) | ✗ |
-| Minimax | Adversarial | O(b^d) | ✗ |
-| Fuerza Bruta | Exhaustivo | O(V!) | ✓ |
-| Prog. Dinámica | Exacto | O(V²) | ✓ |
+| Dijkstra | Exacto | 
+| BFS | Búsqueda | 
+| Greedy | Heurístico | 
+| A* | Heurístico |
+| Genético | Evolutivo | 
+| Minimax | Adversarial | 
+| Fuerza Bruta | Exhaustivo | 
+| Prog. Dinámica | Exacto | 
 
 ## Uso
 
