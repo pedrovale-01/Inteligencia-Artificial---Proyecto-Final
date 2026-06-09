@@ -5,7 +5,7 @@ Visualizador de algoritmos de búsqueda de rutas sobre el grafo de departamentos
 ## Algoritmos incluidos
 
 | Algoritmo | Categoría | 
-|-----------|-----------|-------------|--------|
+|-----------|-----------|
 | Dijkstra | Exacto | 
 | BFS | Búsqueda | 
 | Greedy | Heurístico | 
