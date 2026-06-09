@@ -1,6 +1,7 @@
 # Pathfinding · Perú
 
 Visualizador de algoritmos de búsqueda de rutas sobre el grafo de departamentos y provincias del Perú.
+DATO: el mapa no se visualiza bien porque al usar la api de google no valide por asi decirlo el pago ya que no realize compras por mas de un año con mi tarjeta y por eso no me deja encriptar pero si me da la API_KEY pero con respecto a usar el mapa si funciona :3
 
 ## Algoritmos incluidos
 
